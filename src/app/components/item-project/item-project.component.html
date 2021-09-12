@@ -1,0 +1,49 @@
+<ul class="list-group">
+  <li class="list-group-item">
+    <div class="d-flex justify-content-between">
+      <div>
+        <h5>{{ project.name }}</h5>
+        <div>
+          <p>Creation date: {{ project.id | date: "short" }}</p>
+        </div>
+        <img
+          src="../../../assets/profile.png"
+          alt="imageProfile"
+          class="ml-1 mr-2"
+        />
+        <span>Ignacio Truffa</span>
+      </div>
+
+      <div>
+        <ng-template #popContent>
+          <div class="d-flex flex-column">
+            <button class="btn" (click)="editForm(project)">
+              <span
+                ><img src="./assets/editim.png" alt="edit" class="mr-1 mb-1"
+              /></span>
+              Edit
+            </button>
+            <button class="btn" (click)="deleteForm(project)">
+              <span
+                ><img
+                  src="../../../assets/delete.png"
+                  alt="delete"
+                  class="mr-1 mb-1"
+              /></span>
+              Delete
+            </button>
+          </div>
+        </ng-template>
+        <ng-template #popTitle></ng-template>
+        <button
+          type="button"
+          class="btn"
+          [ngbPopover]="popContent"
+          [popoverTitle]="popTitle"
+        >
+          <img src="./assets/Vector3.png" alt="" />
+        </button>
+      </div>
+    </div>
+  </li>
+</ul>

@@ -1,0 +1,96 @@
+<div
+  class="alert alert-success alert-dismissible fade show"
+  role="alert"
+  *ngIf="successForm"
+>
+  <strong> You saved your project successfully!</strong>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+
+<form
+  (ngSubmit)="createProject()"
+  autocomplete="off"
+  [formGroup]="projectForm"
+  class="container"
+>
+  <div class="mb-3">
+    <label class="form-label mt-3">Project name</label>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Project name"
+      formControlName="name"
+    />
+    <span class="form-text text-danger" *ngIf="fieldOk('name')"
+      >This field is required</span
+    >
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Project description"
+      formControlName="description"
+    />
+    <span class="form-text text-danger" *ngIf="fieldOk('description')"
+      >This field is required</span
+    >
+  </div>
+  <label for="exampleFormControlInput1" class="form-label"
+    >Project manager</label
+  >
+  <select
+    class="form-select"
+    aria-label="Default select example"
+    formControlName="manager"
+  >
+    <option selected disabled hidden value="">Select a Person</option>
+    <option [value]="manager.name" *ngFor="let manager of managers">
+      {{ manager.name }}
+    </option>
+  </select>
+  <label class="form-label">Assigned to</label>
+  <select
+    class="form-select"
+    aria-label="Default select example"
+    formControlName="assigned"
+  >
+    <option selected disabled hidden value="">Select a Person</option>
+    <option [value]="assigned.name" *ngFor="let assigned of asignedList">
+      {{ assigned.name }}
+    </option>
+  </select>
+  <label class="form-label">Status</label>
+  <select
+    class="form-select mb-3"
+    aria-label="Default select example"
+    formControlName="status"
+  >
+    <option selected disabled hidden value="">Select a status</option>
+    <option [value]="status" *ngFor="let status of statusList">
+      {{ status }}
+    </option>
+  </select>
+  <button
+    class="btn btn-danger"
+    type="submit"
+    [disabled]="projectForm.invalid"
+    *ngIf="!projectToEdit"
+  >
+    Create Project
+  </button>
+  <button
+    class="btn btn-danger"
+    type="submit"
+    [disabled]="projectForm.invalid"
+    *ngIf="projectToEdit"
+  >
+    Save Changes
+  </button>
+</form>
